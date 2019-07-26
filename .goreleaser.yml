@@ -1,59 +1,33 @@
 builds:
   # List of builds
-  - # First Build
-    env:
+- # First Build
+  env:
     - CGO_ENABLED=0
-    main: ./uptime_metric_check/main.go
-    # Set the binary output location to bin/ so archive will comply with Sensu Go Asset structure
-    binary: bin/sensu-go-uptime-metrics
-    goos:
-      - darwin
-      - freebsd
-      - linux
-      - openbsd
-      - solaris
-      - windows
-    goarch:
-      - amd64
-      - 386
-      - arm
-      - arm64
-    goarm:
-      - 6
-      - 7
-    ignore:
+  main: ./uptime_metric_check/main.go
+  binary: bin/sensu-go-uptime-metrics
+- main: ./uptime_status_check/main.go
+  binary: bin/sensu-go-uptime-status
+  goos:
+    - darwin
+    - freebsd
+    - linux
+    - netbsd
+    - solaris
+    - windows
+  goarch:
+    - amd64
+    - 386
+    - arm
+    - arm64
+  goarm:
+    - 6
+    - 7
+  ignore:
       # TODO: add freebsd/arm support to gopsutil
-      - goos: freebsd
-        goarch: arm
-  - # Second Build
-    env:
-    - CGO_ENABLED=0
-    main: ./uptime_status_check/main.go
-    # Set the binary output location to bin/ so archive will comply with Sensu Go Asset structure
-    binary: bin/sensu-go-uptime-status
-    goos:
-      - darwin
-      - freebsd
-      - linux
-      - openbsd
-      - solaris
-      - windows
-    goarch:
-      - amd64
-      - 386
-      - arm
-      - arm64
-    goarm:
-      - 6
-      - 7
-    ignore:
-      # TODO: add freebsd/arm support to gopsutil
-      - goos: freebsd
-        goarch: arm
+    - goos: freebsd
+      goarch: arm
 
 checksum:
-  # You can change the name of the checksums file.
-  # Default is `{{ .ProjectName }}_{{ .Version }}_checksums.txt`.
   name_template: "{{ .ProjectName }}_{{ .Version }}_sha256-checksums.txt"
 
 archive:
@@ -62,12 +36,3 @@ archive:
     - LICENSE
     - README.md
     - CHANGELOG.md
-
-  # You can change the name of the GitHub release.
-  # This is parsed with the Go template engine and the following variables
-  # are available:
-  # - ProjectName
-  # - Tag
-  # - Version (Git tag without `v` prefix)
-  # Default is ``
-  #name_template: "{{.ProjectName}}-v{{.Version}}"
