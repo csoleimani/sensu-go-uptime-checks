@@ -1,8 +1,30 @@
 builds:
-- main: ./uptime_metric_check/main.go
+- env:
+    - CGO_ENABLED=0
+  main: ./uptime_metric_check/main.go
   binary: bin/sensu-go-uptime-metrics
-- binary: bin/sensu-go-uptime-status
+  goos:
+    - darwin
+    - freebsd
+    - linux
+    - netbsd
+    - solaris
+    - windows
+  goarch:
+    - amd64
+    - 386
+    - arm
+    - arm64
+  goarm:
+    - 6
+    - 7
+  ignore:
+    - goos: freebsd
+      goarch: arm
+- env:
+    - CGO_ENABLED=0
   main: ./uptime_status_check/main.go
+  binary: bin/sensu-go-uptime-status
   goos:
     - darwin
     - freebsd
