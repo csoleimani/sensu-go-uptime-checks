@@ -1,9 +1,5 @@
 builds:
-  # List of builds
-- # First Build
-  env:
-    - CGO_ENABLED=0
-  main: ./uptime_metric_check/main.go
+- main: ./uptime_metric_check/main.go
   binary: bin/sensu-go-uptime-metrics
 - binary: bin/sensu-go-uptime-status
   main: ./uptime_status_check/main.go
@@ -23,7 +19,6 @@ builds:
     - 6
     - 7
   ignore:
-      # TODO: add freebsd/arm support to gopsutil
     - goos: freebsd
       goarch: arm
 
