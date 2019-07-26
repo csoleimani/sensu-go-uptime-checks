@@ -4,9 +4,9 @@ builds:
   env:
     - CGO_ENABLED=0
   main: ./uptime_metric_check/main.go
-- binary: bin/sensu-go-uptime-metrics
-  main: ./uptime_status_check/main.go
+  binary: bin/sensu-go-uptime-metrics
 - binary: bin/sensu-go-uptime-status
+  main: ./uptime_status_check/main.go
   goos:
     - darwin
     - freebsd
