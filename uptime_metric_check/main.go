@@ -34,18 +34,6 @@ func configureRootCommand() *cobra.Command {
 		Short: "The Sensu Go metric check for system uptime",
 		RunE:  run,
 	}
-
-	cmd.Flags().DurationVarP(&warning,
-		"warning",
-		"w",
-		time.Duration(72*time.Hour),
-		"Warning value in seconds, default is 72 hours (72h)")
-
-	cmd.Flags().DurationVarP(&critical,
-		"critical",
-		"c",
-		time.Duration(168*time.Hour),
-		"Warning value in seconds, default is 1 week (168h)")
 		
 	return cmd
 }
