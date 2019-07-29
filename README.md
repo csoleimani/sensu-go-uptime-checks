@@ -77,7 +77,7 @@ spec:
   - system
 ```
 
-**sensu-go-uptime-metics**
+**sensu-go-uptime-metrics**
 ```yml
 type: CheckConfig
 api_version: core/v2
@@ -96,6 +96,10 @@ spec:
   subscriptions:
   - system
 ```
+
+## Example Output
+
+
 
 ## Usage Examples
 
