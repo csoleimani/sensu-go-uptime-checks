@@ -99,7 +99,7 @@ spec:
 
 ## Example Output
 
-
+![screenshot_of_check_result](http://share.sachshaus.net/985951db097d/Screen%252520Shot%2525202019-07-29%252520at%25252011.35.57%252520AM.png)
 
 ## Usage Examples
 
