@@ -59,6 +59,9 @@ spec:
   - sensu-go-uptime-checks
   interval: 60
   publish: true
+  output_metric_format: nagios_perfdata
+  output_metric_handlers:
+  - infuxdb
   handlers:
   - slack
   subscriptions:
