@@ -30,10 +30,22 @@ func main() {
 //Set up our flags for the command. Note that we have time duration defaults for warning & critical
 func configureRootCommand() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "sensu-go-uptime-metrics",
-		Short: "The Sensu Go metric check for system uptime",
+		Use:   "sensu-go-uptime-status",
+		Short: "The Sensu Go check for system uptime",
 		RunE:  run,
 	}
+
+	cmd.Flags().DurationVarP(&warning,
+		"warning",
+		"w",
+		time.Duration(72*time.Hour),
+		"Warning value in seconds, minutes, or hours, default is 72 hours (72h)")
+
+	cmd.Flags().DurationVarP(&critical,
+		"critical",
+		"c",
+		time.Duration(168*time.Hour),
+		"Warning value in seconds, minutes, or hours default is 1 week (168h)")
 		
 	return cmd
 }
@@ -59,7 +71,7 @@ func checkUptime(event *types.Event) error {
 	
 	//Setting "CheckUptime" as a constant
 	const checkName = "CheckUptime"
-	
+	const metricName = "current_system_uptime"
 	//Setting uptime as the value retrieved from gopsutil
 	uptime, err := host.Uptime()
 	
@@ -75,15 +87,15 @@ func checkUptime(event *types.Event) error {
 	
 	//Sets up conditionss for a comparison
 	if uptimeSecs > critical {
-		msg := fmt.Sprintf("CRITICAL: Host uptime is %s", uptimeSecs)
+		msg := fmt.Sprintf("%s CRITICAL - value = %d | %s=%d\n", checkName, int64(uptimeSecs.Seconds()), metricName, int64(uptimeSecs.Seconds()))
 		io.WriteString(os.Stdout, msg)
 		os.Exit(2)
 	} else if uptimeSecs >= warning && uptimeSecs <= critical {
-		msg := fmt.Sprintf("WARNING: Host uptime is %s", uptimeSecs)
+		msg := fmt.Sprintf("%s WARNING - value = %d | %s=%d\n", checkName, int64(uptimeSecs.Seconds()), metricName, int64(uptimeSecs.Seconds()))
 		io.WriteString(os.Stdout, msg)
 		os.Exit(1)
 	} else {
-		msg := fmt.Sprintf("OK: Host uptime is %s", uptimeSecs)
+		msg := fmt.Sprintf("%s OK - value = %d | %s=%d\n", checkName, int64(uptimeSecs.Seconds()), metricName, int64(uptimeSecs.Seconds()))
 		io.WriteString(os.Stdout, msg)
 		os.Exit(0)
 	}

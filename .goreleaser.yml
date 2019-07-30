@@ -1,12 +1,9 @@
 builds:
-- id: "uptime_metric_check"
+- 
   env:
     - CGO_ENABLED=0
-  main: ./uptime_metric_check/main.go
-  binary: bin/sensu-go-uptime-metrics
-- id: "uptime_status_check"
-  main: ./uptime_status_check/main.go
-  binary: bin/sensu-go-uptime-status
+  main: ./main.go
+  binary: bin/sensu-go-uptime-check
   
   goos:
     - darwin
