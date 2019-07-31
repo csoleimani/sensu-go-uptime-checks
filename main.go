@@ -45,7 +45,7 @@ func configureRootCommand() *cobra.Command {
 		"critical",
 		"c",
 		time.Duration(168*time.Hour),
-		"Warning value in seconds, minutes, or hours default is 1 week (168h)")
+		"Critical value in seconds, minutes, or hours default is 1 week (168h)")
 		
 	return cmd
 }
