@@ -7,7 +7,20 @@ Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
-## [0.0.1] - 2000-01-01
+## [1.0.1] - 2019-07-31
+
+### Fixed
+
+- main.go included verbiage for the `critical` flag that stated the following:
+```
+"Warning value in seconds, minutes, or hours default is 1 week (168h)"
+```
+This has been corrected to:
+```
+"Critical value in seconds, minutes, or hours default is 1 week (168h)"
+```
+
+## [1.0.0] - 2019-07-30
 
 ### Added
 - Initial release
